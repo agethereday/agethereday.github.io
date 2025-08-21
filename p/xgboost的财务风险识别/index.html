@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="基于贝叶斯优化的XGBOOST二分类财务造假识别的可解释性分析（修改版） 数据集： 数据来源：国泰安或wind\n时间范围： 时间选择距今4-5年，8-12年跨度的上市公司的数据（上市公司平均上市寿命为8-12年，证监会处罚具有滞后性，一般为4-5年。）造假标准为证监会处罚归属于财务造假为准，时间范围从选择的时间起点至今。（最大增加标注准确率）\n">
+<title>Xgboost的财务风险识别</title>
+
+<link rel='canonical' href='https://agethereday.github.io/p/xgboost%E7%9A%84%E8%B4%A2%E5%8A%A1%E9%A3%8E%E9%99%A9%E8%AF%86%E5%88%AB/'>
+
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="Xgboost的财务风险识别">
+<meta property='og:description' content="基于贝叶斯优化的XGBOOST二分类财务造假识别的可解释性分析（修改版） 数据集： 数据来源：国泰安或wind\n时间范围： 时间选择距今4-5年，8-12年跨度的上市公司的数据（上市公司平均上市寿命为8-12年，证监会处罚具有滞后性，一般为4-5年。）造假标准为证监会处罚归属于财务造假为准，时间范围从选择的时间起点至今。（最大增加标注准确率）\n">
+<meta property='og:url' content='https://agethereday.github.io/p/xgboost%E7%9A%84%E8%B4%A2%E5%8A%A1%E9%A3%8E%E9%99%A9%E8%AF%86%E5%88%AB/'>
+<meta property='og:site_name' content='yhj的博客'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-19T13:54:31&#43;08:00'/><meta property='article:modified_time' content='2025-08-19T13:54:31&#43;08:00'/>
+<meta name="twitter:title" content="Xgboost的财务风险识别">
+<meta name="twitter:description" content="基于贝叶斯优化的XGBOOST二分类财务造假识别的可解释性分析（修改版） 数据集： 数据来源：国泰安或wind\n时间范围： 时间选择距今4-5年，8-12年跨度的上市公司的数据（上市公司平均上市寿命为8-12年，证监会处罚具有滞后性，一般为4-5年。）造假标准为证监会处罚归属于财务造假为准，时间范围从选择的时间起点至今。（最大增加标注准确率）\n">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu4377039263854300517.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">😄</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">yhj的博客</a></h1>
+            <h2 class="site-description">欢迎来到我的博客</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/agethereday'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://www.kaggle.com/yanghangjin'
+                        target="_blank"
+                        title="Kaggle"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#数据集">数据集：</a>
+      <ol>
+        <li><a href="#时间范围">时间范围：</a></li>
+        <li><a href="#空间范围">空间范围：</a></li>
+      </ol>
+    </li>
+    <li><a href="#特征选取">特征选取</a></li>
+    <li><a href="#数据分析">数据分析：</a>
+      <ol>
+        <li><a href="#聚类分析异质性缓解">聚类分析（异质性缓解）</a></li>
+        <li><a href="#线性关系判断">线性关系判断：</a></li>
+        <li><a href="#分布分析">分布分析</a></li>
+        <li><a href="#缺失值处理">缺失值处理</a></li>
+        <li><a href="#异常值处理">异常值处理</a></li>
+      </ol>
+    </li>
+    <li><a href="#特征构造">特征构造</a></li>
+    <li><a href="#特征筛选">特征筛选</a></li>
+    <li><a href="#算法调优">算法调优</a></li>
+    <li><a href="#可解释性">可解释性：</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/xgboost%E7%9A%84%E8%B4%A2%E5%8A%A1%E9%A3%8E%E9%99%A9%E8%AF%86%E5%88%AB/">Xgboost的财务风险识别</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-08-19</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 4 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="基于贝叶斯优化的xgboost二分类财务造假识别的可解释性分析修改版">基于贝叶斯优化的XGBOOST二分类财务造假识别的可解释性分析（修改版）
+</h1><h2 id="数据集">数据集：
+</h2><p>数据来源：国泰安或wind</p>
+<h3 id="时间范围">时间范围：
+</h3><p>时间选择距今<strong>4-5</strong>年，<strong>8-12</strong>年跨度的上市公司的数据（上市公司平均上市寿命为8-12年，证监会处罚具有<strong>滞后性</strong>，一般为4-5年。）造假标准为证监会处罚归属于财务造假为准，时间范围从选择的时间起点至今。（最大增加标注准确率）</p>
+<h3 id="空间范围">空间范围：
+</h3><p>全部A股上市公司</p>
+<h2 id="特征选取">特征选取
+</h2><p>理论基础：</p>
+<p>国外：</p>
+<p>舞弊三角论，GONE理论，舞弊风险因子理论</p>
+<p>国内：黄世忠八因和五维识别模型。</p>
+<p>特征：</p>
+<p>财务：选取三大财务报表的所有科目，四大指标</p>
+<p>非财务:会计师事务所变频率，审计费用，O-Score，Z值，WindESG综合得分，公司市值，成长性，资产价值波动性，风险系数，第一大股东持股比率(%)、管理层持股比例，内部控制是否有效、内部控制是否存在缺陷、是否采取整改措施、是否出具内控评价报告结论、是否披露内控评价报告、会计变更次数（可能为“会计变更次数”）、未完成整改个数、缺陷个数，关联交易占营业收入比、是否增发新股上市，客户集中度，情感语调，cpi，人均可支配收入，GDP增速，PMI，缺失值数量，是否st，以前年度是否造假。</p>
+<h2 id="数据分析">数据分析：
+</h2><h3 id="聚类分析异质性缓解">聚类分析（异质性缓解）
+</h3><p>各行业造假数量分布不同，可按证监会行业先划分后按照业务逻辑进行合并，在合并组内进行<strong>KNN</strong>聚类处理（可能会出现部分头部或垄断公司）。</p>
+<h3 id="线性关系判断">线性关系判断：
+</h3><p>二分类因变量 + 连续自变量：用<strong>逻辑回归</strong>检验 logit 尺度的线性关联：</p>
+<p>​					logit(<em>p</em>)=ln(<em>p</em>/(1−<em>p</em>)  其中p为 Y=1 （造假）的概率</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="n">statsmodels</span><span class="o">.</span><span class="n">api</span> <span class="n">as</span> <span class="n">sm</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">pandas</span> <span class="n">as</span> <span class="n">pd</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># X为连续变量，Y为造假</span>
+</span></span><span class="line"><span class="cl"><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="n">x</span><span class="o">=</span> 
+</span></span><span class="line"><span class="cl">  <span class="n">y</span><span class="o">=</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="n">X</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">])</span>  <span class="c1"># 添加截距项</span>
+</span></span><span class="line"><span class="cl"><span class="n">model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">Logit</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">],</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>  <span class="c1"># 查看系数β1及p值</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>若(beta_1)的 p 值 &lt; 0.05，拒绝 (beta_1=0) 的原假设，认为 X 与 Y 存在<strong>统计显著的线性</strong></p>
+<p>在模型中加入\(X^2\)项，若其系数显著，说明存在非线性关系（反证原线性假设不成立）。</p>
+<p>两个二分类变量则用<strong>Phi 系数</strong>结合<strong>卡方检验</strong>判断线性关联强度。</p>
+<h3 id="分布分析">分布分析
+</h3><p>概率密度直方图</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">import numpy as np
+</span></span><span class="line"><span class="cl">import seaborn as sns
+</span></span><span class="line"><span class="cl">import matplotlib.pyplot as plt
+</span></span><span class="line"><span class="cl">import pandas as pd
+</span></span><span class="line"><span class="cl">import math
+</span></span><span class="line"><span class="cl">plt.rcParams[&#34;font.family&#34;] = [&#34;SimHei&#34;, &#34;WenQuanYi Micro Hei&#34;, &#34;Heiti TC&#34;]
+</span></span><span class="line"><span class="cl">sns.set(font_scale=1.2, style=&#34;whitegrid&#34;)
+</span></span><span class="line"><span class="cl">np.random.seed(42)
+</span></span><span class="line"><span class="cl">df=pd.read_csv()#文件地址
+</span></span><span class="line"><span class="cl">df1=df[&#34;&#34;:&#34;&#34;]#选取的列名
+</span></span><span class="line"><span class="cl">num_features = df1.shape[1]
+</span></span><span class="line"><span class="cl">num_pages=math.ceil(len(num_features)/10)
+</span></span><span class="line"><span class="cl">for page in range(num_pages):
+</span></span><span class="line"><span class="cl">	start_idx= page * 10
+</span></span><span class="line"><span class="cl">	end_idx = min((page + 1) * 10, len(num_features))
+</span></span><span class="line"><span class="cl">	fig, axes = plt.subplots(2, 5, figsize=(22, 10))
+</span></span><span class="line"><span class="cl">	axes = axes.flatten()
+</span></span><span class="line"><span class="cl">    for i in df1:
+</span></span><span class="line"><span class="cl">    	ax = axes[i]
+</span></span><span class="line"><span class="cl">        sns.histplot(data=i,
+</span></span><span class="line"><span class="cl">        kde=True, 
+</span></span><span class="line"><span class="cl">        stat=&#34;density&#34;,
+</span></span><span class="line"><span class="cl">        bins=30,
+</span></span><span class="line"><span class="cl">        alpha=0.7,
+</span></span><span class="line"><span class="cl">        color=&#39;skyblue&#39;,
+</span></span><span class="line"><span class="cl">        edgecolor=&#39;black&#39;)
+</span></span><span class="line"><span class="cl">     plt.show()
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="缺失值处理">缺失值处理
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: center"><strong>缺失比例</strong></th>
+          <th style="text-align: center"><strong>首选方法</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">&gt;50%</td>
+          <td style="text-align: center">删除非关键特征</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">20%-50%</td>
+          <td style="text-align: center">预测模型填充</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">&lt;20%</td>
+          <td style="text-align: center">统计量填充+缺失标记</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="异常值处理">异常值处理
+</h3><p>分析异常值的原因，如果不符合逻辑删去，如果是偏态分布则<strong>log化</strong>，压缩数据。</p>
+<p>在对正态分布的特征进行<strong>Z-Score</strong>标准化，非正态则使用<strong>修正 Z-Score</strong>。</p>
+<h2 id="特征构造">特征构造
+</h2><p>相关信息：构造个别特征营业总收入/营业总成本，（应收账款+合同资产）/总资产，利息收入/货币资金，预付账款/总资产，固定资产周转天数，在建工程/总资产</p>
+<p>时间趋势信息：构造滞后特征，滑动窗口，拓展窗口，差分特征。</p>
+<p>纵向信息：构造平均绝对偏差，最大回撤特征</p>
+<h2 id="特征筛选">特征筛选
+</h2><p><strong>主成分分析法 (PCA)<strong>筛选，如果需要特征可解释性则使用</strong>REC</strong></p>
+<h2 id="算法调优">算法调优
+</h2><p>5折交叉验证 将数据按时间顺序划分为连续的5个区块（折），每次训练集为当前折之前的所有数据，测试集为当前折。确保测试集时间点始终晚于训练集。</p>
+<p>评估指标：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>PA-AUC：PR曲线是以纵轴为Precision，横轴为Recall，通过改变正负的阀值得到不同的Precision和Recall，构成的曲线，AUC是曲线下方的面积。以此来描述模型的表现。</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>召回率：以实际样本为判断依据，实际为正例的样本中，被预测正确的正例占总实际正例样本的比例。</strong></td>
+      </tr>
+      <tr>
+          <td><strong>F2分数：召回率和精确率是一对矛盾的度量，因此需要综合考虑这两个指标，得到一个综合效果最好的模型。但是财务造假对召回率要求较高，普通的二分类评估指标F1并不适合该模型，而F2-Score，在召回率和精确率二者偏向召回率，更适合财务造假模型。</strong></td>
+      </tr>
+  </tbody>
+</table></div>
+<p>阀值优化（寻找最优F2分数）与贝叶斯超参数调优（寻找最优召回率）</p>
+<p>对于超参数的范围可参考过往论文。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"></code></pre></td></tr></table>
+</div>
+</div><h2 id="可解释性">可解释性：
+</h2><p>xgboost：用XGBoost内嵌评估指标参数可以增强模型特征可解释性。权重（Weight）、覆盖率（Cover）和增益（Gain）三个评估指标分别反映特征的分裂频次、信息增益及影响样本数量，量化并排序特征的重要性。</p>
+<p>shap值：SHAP 即 SHapley Additive exPlanations（夏普利加性解释） ，是可解释人工智能（XAI）领域中一种强大的技术。它基于博弈论中的 Shapley 值，用于解释机器学习模型的输出 。</p>
+<p><img src="/index.assets/image-20250821202646955.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250821202646955"
+	
+	
+></p>
+<p>示例：</p>
+<p><img src="/index.assets/image-20250821203808553.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250821203808553"
+	
+	
+></p>
+<center>权重<center>
+<p><img src="/index.assets/image-20250821203832813.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250821203832813"
+	
+	
+></p>
+<center>覆盖率 <center>
+<p><img src="/index.assets/image-20250821203852778.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250821203852778"
+	
+	
+></p>
+<center>增益 <center>
+<p><img src="/index.assets/image-20250821203915027.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250821203915027"
+	
+	
+></p>
+<center>shap单样本变量（用于解释该公司为什么被识别为假）<center>
+<p><img src="/index.assets/image-20250821205048619.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250821205048619"
+	
+	
+></p>
+<center>交互图（用于判别各特征的交互作用，如目前特征量大的情况下并不好用）<center>
+<p>相关链接：</p>
+<p><a class="link" href="https://docs.xgboost.com.cn/en/release_3.0.0/parameter.html"  target="_blank" rel="noopener"
+    >XGBoost </a></p>
+<p><a class="link" href="https://shap.readthedocs.cn/en/latest/"  target="_blank" rel="noopener"
+    >SHAP</a></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 yhj
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
