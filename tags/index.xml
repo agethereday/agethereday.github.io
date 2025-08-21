@@ -6,6 +6,15 @@
         <description>Recent content in Tags on yhj的博客</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <copyright>yhj</copyright><atom:link href="https://agethereday.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+        <copyright>yhj</copyright>
+        <lastBuildDate>Tue, 10 Jun 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://agethereday.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Xgboost</title>
+        <link>https://agethereday.github.io/tags/xgboost/</link>
+        <pubDate>Tue, 10 Jun 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://agethereday.github.io/tags/xgboost/</guid>
+        <description></description>
+        </item>
+        
     </channel>
 </rss>
