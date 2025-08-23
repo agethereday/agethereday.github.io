@@ -179,7 +179,7 @@
 &lt;/h2&gt;&lt;p&gt;我们对生产效率出于及时性只考虑到月和日这一层次。通过筛选可以看出负责人负责多个车间，所以行从包含角度来排列，从上到下依次为，日，负责人，车间，项目名字段。值则为生产数量，不合格数量字段。筛选器选用月。&lt;/p&gt;
 &lt;p&gt;切片器：切片器是 Excel 中一种强大的数据分析工具，它可以以直观、交互的方式快速筛选数据透视表中的数据。&lt;/p&gt;
 &lt;p&gt;插入以月筛选的切片器，通过添加按钮数将其转化为横向。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://agethereday.github.io/excel.assets/image-20250823145157367.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://agethereday.github.io/excel.assets/1.png&#34;
 	
 	
 	
@@ -306,7 +306,7 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;=IF(XLOOKUP(A75,$B$35:$AF$35,$B$38:$AF$38)=&amp;#34;&amp;#34;,B74,XLOOKUP(A75,$B$35:$AF$35,$B$38:$AF$38))
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://agethereday.github.io/excel.assets/image-20250823115902583.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://agethereday.github.io/excel.assets/2.png&#34;
 	
 	
 	
@@ -318,7 +318,7 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;月负责人不合格占比饼图&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;数据源&lt;/strong&gt;为月表中的月负责人表&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://agethereday.github.io/excel.assets/image-20250823122943001.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://agethereday.github.io/excel.assets/3.png&#34;
 	
 	
 	
@@ -330,7 +330,7 @@
 &gt;&lt;/p&gt;
 &lt;h2 id=&#34;布局&#34;&gt;布局
 &lt;/h2&gt;&lt;p&gt;具体布局思路可以业尾的&lt;strong&gt;如何搭建看板链接&lt;/strong&gt;，或许可以对你有一些启发。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://agethereday.github.io/excel.assets/image-20250823143453996.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://agethereday.github.io/excel.assets/4.png&#34;
 	
 	
 	
@@ -340,7 +340,7 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://agethereday.github.io/excel.assets/image-20250823143522411.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://agethereday.github.io/excel.assets/5.png&#34;
 	
 	
 	
