@@ -277,7 +277,7 @@
     <li><a href="#特征选取">特征选取</a></li>
     <li><a href="#数据分析">数据分析：</a>
       <ol>
-        <li><a href="#聚类分析异质性缓解">聚类分析（异质性缓解）</a></li>
+        <li><a href="#聚类分析异质性缓解重要"><strong>聚类分析（异质性缓解重要）</strong></a></li>
         <li><a href="#线性关系判断">线性关系判断：</a></li>
         <li><a href="#分布分析">分布分析</a></li>
         <li><a href="#缺失值处理">缺失值处理</a></li>
@@ -285,6 +285,7 @@
       </ol>
     </li>
     <li><a href="#特征构造">特征构造</a></li>
+    <li><a href="#不平衡数据的处理">不平衡数据的处理</a></li>
     <li><a href="#特征筛选">特征筛选</a></li>
     <li><a href="#算法调优">算法调优</a></li>
     <li><a href="#可解释性">可解释性：</a></li>
@@ -368,7 +369,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 4 分钟
+                    阅读时长: 5 分钟
                 </time>
             </div>
         
@@ -385,7 +386,7 @@
     
     <h1 id="基于贝叶斯优化的xgboost二分类财务造假识别的可解释性分析修改版">基于贝叶斯优化的XGBOOST二分类财务造假识别的可解释性分析（修改版）
 </h1><h2 id="数据集">数据集：
-</h2><p>数据来源：国泰安或wind</p>
+</h2><p>数据来源：<strong>国泰安或wind</strong></p>
 <h3 id="时间范围">时间范围：
 </h3><p>时间选择距今<strong>4-5</strong>年，<strong>8-12</strong>年跨度的上市公司的数据（上市公司平均上市寿命为8-12年，证监会处罚具有<strong>滞后性</strong>，一般为4-5年。）造假标准为证监会处罚归属于财务造假为准，时间范围从选择的时间起点至今。（最大增加标注准确率）</p>
 <h3 id="空间范围">空间范围：
@@ -394,16 +395,17 @@
 </h2><p>理论基础：</p>
 <p>国外：</p>
 <p>舞弊三角论，GONE理论，舞弊风险因子理论</p>
-<p>国内：黄世忠八因和五维识别模型。</p>
+<p>国内：<strong>黄世忠八因和五维识别模型。</strong></p>
 <p>特征：</p>
 <p>财务：选取三大财务报表的所有科目，四大指标</p>
 <p>非财务:会计师事务所变频率，审计费用，O-Score，Z值，WindESG综合得分，公司市值，成长性，资产价值波动性，风险系数，第一大股东持股比率(%)、管理层持股比例，内部控制是否有效、内部控制是否存在缺陷、是否采取整改措施、是否出具内控评价报告结论、是否披露内控评价报告、会计变更次数（可能为“会计变更次数”）、未完成整改个数、缺陷个数，关联交易占营业收入比、是否增发新股上市，客户集中度，情感语调，cpi，人均可支配收入，GDP增速，PMI，缺失值数量，是否st，以前年度是否造假。</p>
 <h2 id="数据分析">数据分析：
-</h2><h3 id="聚类分析异质性缓解">聚类分析（异质性缓解）
+</h2><h3 id="聚类分析异质性缓解重要"><strong>聚类分析（异质性缓解重要）</strong>
 </h3><p>各行业造假数量分布不同，可按证监会行业先划分后按照业务逻辑进行合并，在合并组内进行<strong>KNN</strong>聚类处理（可能会出现部分头部或垄断公司）。</p>
 <h3 id="线性关系判断">线性关系判断：
 </h3><p>二分类因变量 + 连续自变量：用<strong>逻辑回归</strong>检验 logit 尺度的线性关联：</p>
-<p>​					logit(<em>p</em>)=ln(<em>p</em>/(1−<em>p</em>)  其中p为 Y=1 （造假）的概率</p>
+<pre><code>				&lt;center&gt;logit(*p*)=ln(*p*/(1−*p*)  其中p为 Y=1 （造假）的概率&lt;center&gt;
+</code></pre>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -522,13 +524,40 @@
 </table></div>
 <h3 id="异常值处理">异常值处理
 </h3><p>分析异常值的原因，如果不符合逻辑删去，如果是偏态分布则<strong>log化</strong>，压缩数据。</p>
-<p>在对正态分布的特征进行<strong>Z-Score</strong>标准化，非正态则使用<strong>修正 Z-Score</strong>。</p>
+<p>再对正态分布的特征进行<strong>Z-Score</strong>标准化，非正态则使用<strong>修正 Z-Score</strong>。</p>
 <h2 id="特征构造">特征构造
 </h2><p>相关信息：构造个别特征营业总收入/营业总成本，（应收账款+合同资产）/总资产，利息收入/货币资金，预付账款/总资产，固定资产周转天数，在建工程/总资产</p>
 <p>时间趋势信息：构造滞后特征，滑动窗口，拓展窗口，差分特征。</p>
 <p>纵向信息：构造平均绝对偏差，最大回撤特征</p>
+<h2 id="不平衡数据的处理">不平衡数据的处理
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: center">采样方法</th>
+          <th style="text-align: center">适用范围</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">欠采样（SMOTE）</td>
+          <td style="text-align: center">少数类样本分布较均匀，无极端稀疏或孤立点。</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">过采样（Random Undersampling）</td>
+          <td style="text-align: center">多数类样本存在大量冗余</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">二者结合（SMOTE + Tomek Links）</td>
+          <td style="text-align: center">类间边界存在大量 “模糊样本对”，需通过删除边界噪声强化类别区分。</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">逻辑构造</td>
+          <td style="text-align: center">设定规则，挑选出对应负样本与正样本对应</td>
+      </tr>
+  </tbody>
+</table></div>
 <h2 id="特征筛选">特征筛选
-</h2><p><strong>主成分分析法 (PCA)<strong>筛选，如果需要特征可解释性则使用</strong>REC</strong></p>
+</h2><p>由于XGboost算法计算速度慢，在这里我们先进行初步筛选，删除方差低于阈值，和特征之间高度相关的，在根据内其重要性函数选取一定数量的特征，在进行递归消除来选取特征。XGBoost内嵌评估指标参数并非一定需要，可解释性shap足以胜任，如果筛选后速度仍旧太慢则可改用<strong>LightGBM</strong>或<strong>Catboost</strong>。</p>
 <h2 id="算法调优">算法调优
 </h2><p>5折交叉验证 将数据按时间顺序划分为连续的5个区块（折），每次训练集为当前折之前的所有数据，测试集为当前折。确保测试集时间点始终晚于训练集。</p>
 <p>评估指标：</p>
@@ -548,15 +577,9 @@
   </tbody>
 </table></div>
 <p>阀值优化（寻找最优F2分数）与贝叶斯超参数调优（寻找最优召回率）</p>
-<p>对于超参数的范围可参考过往论文。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"></code></pre></td></tr></table>
-</div>
-</div><h2 id="可解释性">可解释性：
-</h2><p>xgboost：用XGBoost内嵌评估指标参数可以增强模型特征可解释性。权重（Weight）、覆盖率（Cover）和增益（Gain）三个评估指标分别反映特征的分裂频次、信息增益及影响样本数量，量化并排序特征的重要性。</p>
+<p>对于超参数的选取范围可参考过往论文或XGBoost文档。</p>
+<h2 id="可解释性">可解释性：
+</h2><p>XGboost：用XGBoost内嵌评估指标参数可以增强模型特征可解释性。权重（Weight）、覆盖率（Cover）和增益（Gain）三个评估指标分别反映特征的分裂频次、信息增益及影响样本数量，量化并排序特征的重要性。</p>
 <p>shap值：SHAP 即 SHapley Additive exPlanations（夏普利加性解释） ，是可解释人工智能（XAI）领域中一种强大的技术。它基于博弈论中的 Shapley 值，用于解释机器学习模型的输出 。</p>
 <p><img src="/p/xgboost%E7%9A%84%E8%B4%A2%E5%8A%A1%E9%A3%8E%E9%99%A9%E8%AF%86%E5%88%AB/index.assets/image-20250821202646955.png"
 	width="830"
@@ -603,14 +626,18 @@
 	
 ></p>
 <center>覆盖率 <center>
-<p><img src="/index.assets/image-20250821203852778.png"
-	
-	
-	
+<p><img src="/p/xgboost%E7%9A%84%E8%B4%A2%E5%8A%A1%E9%A3%8E%E9%99%A9%E8%AF%86%E5%88%AB/index.assets/image-20250821203852778.png"
+	width="830"
+	height="292"
+	srcset="/p/xgboost%E7%9A%84%E8%B4%A2%E5%8A%A1%E9%A3%8E%E9%99%A9%E8%AF%86%E5%88%AB/index.assets/image-20250821203852778_hu12481866188837041281.png 480w, /p/xgboost%E7%9A%84%E8%B4%A2%E5%8A%A1%E9%A3%8E%E9%99%A9%E8%AF%86%E5%88%AB/index.assets/image-20250821203852778_hu12506172912876355103.png 1024w"
 	loading="lazy"
 	
 		alt="image-20250821203852778"
 	
+	
+		class="gallery-image" 
+		data-flex-grow="284"
+		data-flex-basis="682px"
 	
 ></p>
 <center>增益 <center>
@@ -646,9 +673,9 @@
 <center>交互图（用于判别各特征的交互作用，如目前特征量大的情况下并不好用）<center>
 <p>相关链接：</p>
 <p><a class="link" href="https://docs.xgboost.com.cn/en/release_3.0.0/parameter.html"  target="_blank" rel="noopener"
-    >XGBoost </a></p>
+    >XGBoost 官方文档</a></p>
 <p><a class="link" href="https://shap.readthedocs.cn/en/latest/"  target="_blank" rel="noopener"
-    >SHAP</a></p>
+    >SHAP官方文档</a></p>
 
 </section>
 
@@ -734,8 +761,6 @@
     <footer class="site-footer">
     <section class="copyright">
         &copy; 
-        
-            2020 - 
         
         2025 yhj
     </section>

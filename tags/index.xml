@@ -7,7 +7,15 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>yhj</copyright>
-        <lastBuildDate>Tue, 10 Jun 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://agethereday.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 10 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://agethereday.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>生产excel</title>
+        <link>https://agethereday.github.io/tags/%E7%94%9F%E4%BA%A7excel/</link>
+        <pubDate>Thu, 10 Jul 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://agethereday.github.io/tags/%E7%94%9F%E4%BA%A7excel/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>Xgboost</title>
         <link>https://agethereday.github.io/tags/xgboost/</link>
         <pubDate>Tue, 10 Jun 2025 00:00:00 +0000</pubDate>

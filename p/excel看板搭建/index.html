@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="项目：EXCEL搭建数据看板 该文章为搭建看板文档，如有错误还望海涵，评论系统还未搭建，如有疑问可通过邮箱联系我。\n明确目标 我们首先要明确搭建数据看板的目标是什么,如：\n部门 用途 看板类型 生产 保障生产效率、质量和成本可控 生产监控，质量管控，成本优化，设备管理 运营 提升业务效率、用户体验和业绩增长 业务流程监控，用户行为分析，业绩目标追踪，市场与竞争分析 财务 确保资金安全、控制财务风险、支撑战略决策 资金与现金流监控，成本与利润分析，预算与实际对比，财务风险预警 我们搭建看板的目的是为了监控生产和分析生产，激励生产的作用。\n">
+<title>Excel看板搭建</title>
+
+<link rel='canonical' href='https://agethereday.github.io/p/excel%E7%9C%8B%E6%9D%BF%E6%90%AD%E5%BB%BA/'>
+
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="Excel看板搭建">
+<meta property='og:description' content="项目：EXCEL搭建数据看板 该文章为搭建看板文档，如有错误还望海涵，评论系统还未搭建，如有疑问可通过邮箱联系我。\n明确目标 我们首先要明确搭建数据看板的目标是什么,如：\n部门 用途 看板类型 生产 保障生产效率、质量和成本可控 生产监控，质量管控，成本优化，设备管理 运营 提升业务效率、用户体验和业绩增长 业务流程监控，用户行为分析，业绩目标追踪，市场与竞争分析 财务 确保资金安全、控制财务风险、支撑战略决策 资金与现金流监控，成本与利润分析，预算与实际对比，财务风险预警 我们搭建看板的目的是为了监控生产和分析生产，激励生产的作用。\n">
+<meta property='og:url' content='https://agethereday.github.io/p/excel%E7%9C%8B%E6%9D%BF%E6%90%AD%E5%BB%BA/'>
+<meta property='og:site_name' content='yhj的博客'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='生产excel' /><meta property='article:published_time' content='2025-07-10T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-07-10T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="Excel看板搭建">
+<meta name="twitter:description" content="项目：EXCEL搭建数据看板 该文章为搭建看板文档，如有错误还望海涵，评论系统还未搭建，如有疑问可通过邮箱联系我。\n明确目标 我们首先要明确搭建数据看板的目标是什么,如：\n部门 用途 看板类型 生产 保障生产效率、质量和成本可控 生产监控，质量管控，成本优化，设备管理 运营 提升业务效率、用户体验和业绩增长 业务流程监控，用户行为分析，业绩目标追踪，市场与竞争分析 财务 确保资金安全、控制财务风险、支撑战略决策 资金与现金流监控，成本与利润分析，预算与实际对比，财务风险预警 我们搭建看板的目的是为了监控生产和分析生产，激励生产的作用。\n">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu4377039263854300517.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">😄</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">yhj的博客</a></h1>
+            <h2 class="site-description">欢迎来到我的博客</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/agethereday'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://www.kaggle.com/yanghangjin'
+                        target="_blank"
+                        title="Kaggle"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#明确目标">明确目标</a></li>
+    <li><a href="#确定指标">确定指标</a></li>
+    <li><a href="#确认看板模块">确认看板模块</a></li>
+    <li><a href="#数据">数据</a></li>
+    <li><a href="#数据透视表">数据透视表</a></li>
+    <li><a href="#图表的制作">图表的制作</a>
+      <ol>
+        <li><a href="#表">表</a></li>
+        <li><a href="#图">图</a></li>
+      </ol>
+    </li>
+    <li><a href="#布局">布局</a></li>
+    <li><a href="#看板搭建总结">看板搭建总结</a>
+      <ol>
+        <li><a href="#改进方向">改进方向</a></li>
+      </ol>
+    </li>
+    <li><a href="#相关链接">相关链接</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/excel/" >
+                Excel
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/excel%E7%9C%8B%E6%9D%BF%E6%90%AD%E5%BB%BA/">Excel看板搭建</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-07-10</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 4 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="项目excel搭建数据看板">项目：EXCEL搭建数据看板
+</h1><p>该文章为搭建看板文档，如有错误还望海涵，评论系统还未搭建，如有疑问可通过邮箱联系我。</p>
+<h2 id="明确目标">明确目标
+</h2><p>我们首先要明确搭建数据看板的目标是什么,如：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: center">部门</th>
+          <th style="text-align: center">用途</th>
+          <th style="text-align: center">看板类型</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center"><strong>生产</strong></td>
+          <td style="text-align: center"><strong>保障生产效率、质量和成本可控</strong></td>
+          <td style="text-align: center">生产监控，质量管控，成本优化，设备管理</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><strong>运营</strong></td>
+          <td style="text-align: center"><strong>提升业务效率、用户体验和业绩增长</strong></td>
+          <td style="text-align: center">业务流程监控，用户行为分析，业绩目标追踪，市场与竞争分析</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><strong>财务</strong></td>
+          <td style="text-align: center"><strong>确保资金安全、控制财务风险、支撑战略决策</strong></td>
+          <td style="text-align: center">资金与现金流监控，成本与利润分析，预算与实际对比，财务风险预警</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>我们搭建看板的目的是为了监控生产和分析生产，激励生产的作用。</p>
+<h2 id="确定指标">确定指标
+</h2><p>明确了我们的目标之后，我们需要确认我们所需的指标体系——即用什么可以衡量我们的我们的目的。这里我们以生产质量为例：</p>
+<p>生产质量=产品合格率=（生产总数-不合格数）/生产总数(因为浮点数的原因，不要使用1-不合格率)</p>
+<h2 id="确认看板模块">确认看板模块
+</h2><p>时间维度：</p>
+<p>日度数据，周度数据，月度数据，季度数据，年度数据</p>
+<p>空间维度：</p>
+<p>个人，小组长，车间，部门，公司
+可视化：</p>
+<p>表格，折线图（趋势），饼图（占比），柱状图（比较）</p>
+<h2 id="数据">数据
+</h2><p>我们选用CSDN开源的生产数据，数据来源链接我会放业尾。</p>
+<p>对原始数据其如下：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>项目名</th>
+          <th>生产车间</th>
+          <th>生产数量</th>
+          <th>不合格数量</th>
+          <th>负责人</th>
+          <th>日期</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>SC001</td>
+          <td>一车间</td>
+          <td>1409</td>
+          <td>2</td>
+          <td>王成蕾</td>
+          <td>2021-1-1</td>
+      </tr>
+      <tr>
+          <td>SC002</td>
+          <td>一车间</td>
+          <td>733</td>
+          <td>2</td>
+          <td>刘杰</td>
+          <td>2021-1-1</td>
+      </tr>
+      <tr>
+          <td>SC003</td>
+          <td>二车间</td>
+          <td>1071</td>
+          <td>1</td>
+          <td>张博</td>
+          <td>2021-1-1</td>
+      </tr>
+      <tr>
+          <td>SC004</td>
+          <td>三车间</td>
+          <td>1435</td>
+          <td>3</td>
+          <td>赵丽</td>
+          <td>2021-1-1</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>我们日期拆解为年，月和日。我们使用可以使用日期函数和取数函数（取数函数需将日期改为aaaa-bb-cc形式。），我这里使用日期函数。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">year()#提取年 
+</span></span><span class="line"><span class="cl">ceiling(month()/3,1)#提取季度 
+</span></span><span class="line"><span class="cl">month()#提取月份
+</span></span><span class="line"><span class="cl">WEEKNUM()#提前周
+</span></span><span class="line"><span class="cl">day()#提前日
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>处理后结果：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>项目名</th>
+          <th>生产车间</th>
+          <th>生产数量</th>
+          <th>不合格数量</th>
+          <th>负责人</th>
+          <th>日期</th>
+          <th>合格率</th>
+          <th>月</th>
+          <th>日</th>
+          <th>季度</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>SC001</td>
+          <td>一车间</td>
+          <td>1409</td>
+          <td>2</td>
+          <td>王成蕾</td>
+          <td>2021-1-1</td>
+          <td>99.86%</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+      </tr>
+      <tr>
+          <td>SC002</td>
+          <td>一车间</td>
+          <td>733</td>
+          <td>2</td>
+          <td>刘杰</td>
+          <td>2021-1-1</td>
+          <td>99.73%</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+      </tr>
+      <tr>
+          <td>SC003</td>
+          <td>二车间</td>
+          <td>1071</td>
+          <td>1</td>
+          <td>张博</td>
+          <td>2021-1-1</td>
+          <td>99.91%</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+      </tr>
+  </tbody>
+</table></div>
+<h2 id="数据透视表">数据透视表
+</h2><p>我们对生产效率出于及时性只考虑到月和日这一层次。通过筛选可以看出负责人负责多个车间，所以行从包含角度来排列，从上到下依次为，日，负责人，车间，项目名字段。值则为生产数量，不合格数量字段。筛选器选用月。</p>
+<p>切片器：切片器是 Excel 中一种强大的数据分析工具，它可以以直观、交互的方式快速筛选数据透视表中的数据。</p>
+<p>插入以月筛选的切片器，通过添加按钮数将其转化为横向。</p>
+<p><img src="/excel.assets/image-20250823145157367.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250823145157367"
+	
+	
+></p>
+<h2 id="图表的制作">图表的制作
+</h2><h3 id="表">表
+</h3><ul>
+<li>年表：</li>
+</ul>
+<p>按项目名汇总生产总量与不合格生产总量。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">=SUMIF(Sheet3!$A$2:$A$50001,A2,Sheet3!$C$2:$C$50001)#数据源使用原始数据表
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>月表：</li>
+</ul>
+<p>从分析的角度我们需要将异动进行拆解归因，从我们的现有数据来看可以将其拆解为“人”，“产品”，“厂房”——负责人，项目名，生产车间。不合格数=人+设备+原材料+方法+环境（厂房）</p>
+<p>所以我们需要分别建立月负责人，月项目名，月生产车间。因为我们需要其能按月变动，所以数据源应为数据透视表。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">=SUMIF(Sheet4!$C:$C,A20,Sheet4!$F:$F)#月负责人，月项目名，月生产车间都类似
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>日表：</p>
+</li>
+<li>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>月份</th>
+          <th>=数据透视表的月份</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>日期</td>
+          <td>1-31（从1-31号，共31列）</td>
+      </tr>
+      <tr>
+          <td>生产数量</td>
+          <td>=SUMIF(数据透视表!$A:A,B49,数据透视表!$B:B)</td>
+      </tr>
+      <tr>
+          <td>不合格数量</td>
+          <td>=SUMIF(数据透视表!$A:A,B49,数据透视表!$C:C)</td>
+      </tr>
+      <tr>
+          <td>合格率</td>
+          <td>=（生产总数-不合格数）/生产总数</td>
+      </tr>
+  </tbody>
+</table></div>
+</li>
+</ul>
+<h3 id="图">图
+</h3><p>日合格率波动图</p>
+<p>行列转化：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>日期</th>
+          <th>合格率</th>
+          <th>上限</th>
+          <th>下限</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td>0.997183623</td>
+          <td>0.997651133</td>
+          <td>0.996456577</td>
+      </tr>
+  </tbody>
+</table></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">==XLOOKUP(A45,$B$35:$AF$35,$B$38:$AF$38)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>异常值</strong>计算：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Q1=QUARTILE(B38:AF38,1)
+</span></span><span class="line"><span class="cl">Q3=QUARTILE(B38:AF38,3)
+</span></span><span class="line"><span class="cl">IQR=Q3-Q1
+</span></span><span class="line"><span class="cl">异常上限=Q3+1.5IQR
+</span></span><span class="line"><span class="cl">异常下限=Q1-1.5IQR
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>纵坐标轴范围：上下限小数点四位+-1</p>
+<p>蓝色虚线为<strong>趋势线</strong></p>
+<p>月份天数不同：将31和30加一个<strong>空值检验</strong>，为空等于一个值即可。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">=IF(XLOOKUP(A75,$B$35:$AF$35,$B$38:$AF$38)=&#34;&#34;,B74,XLOOKUP(A75,$B$35:$AF$35,$B$38:$AF$38))
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/excel.assets/image-20250823115902583.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250823115902583"
+	
+	
+></p>
+<p>月负责人不合格占比饼图</p>
+<p><strong>数据源</strong>为月表中的月负责人表</p>
+<p><img src="/excel.assets/image-20250823122943001.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250823122943001"
+	
+	
+></p>
+<h2 id="布局">布局
+</h2><p>具体布局思路可以业尾的<strong>如何搭建看板链接</strong>，或许可以对你有一些启发。</p>
+<p><img src="/excel.assets/image-20250823143453996.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250823143453996"
+	
+	
+></p>
+<p><img src="/excel.assets/image-20250823143522411.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250823143522411"
+	
+	
+></p>
+<p>数据通过xlookup进行查找即可。</p>
+<h2 id="看板搭建总结">看板搭建总结
+</h2><p>纯excel搭建不够方便，需要操作的太多，数据多有点卡，可视化效果不够好，实时数据可能还需要外部导入，直接从数据库接口获取数据。可以尝试<strong>ableau</strong>，<strong>Power BI</strong>，或excel的<strong>power query</strong>。</p>
+<h3 id="改进方向">改进方向
+</h3><p><strong>实时动态数据</strong>，为起到监控作用，其需要具有实时数据输入功能。</p>
+<p><strong>异动归因</strong>，原设计对异动原因无法有效分析。</p>
+<p><strong>异动标准</strong>，实时数据的异动标准可能需要历史数据来进行确认，或这用与预测数据和标准数据的偏离度来确认。</p>
+<h2 id="相关链接">相关链接
+</h2><p><a class="link" href="https://gitee.com/qq747715884/excel_note"  target="_blank" rel="noopener"
+    >感谢CSDN的酸菜鱼土豆大侠，Excel_Note : excel 开源文档</a></p>
+<p><a class="link" href="https://www.cnblogs.com/bytedata/p/16495557.html"  target="_blank" rel="noopener"
+    >如何搭建清晰易懂的数据看板？ - 字节跳动数据平台 - 博客园</a></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E7%94%9F%E4%BA%A7excel/">生产excel</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 yhj
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

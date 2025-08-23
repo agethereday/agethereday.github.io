@@ -7,7 +7,364 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>yhj</copyright>
-        <lastBuildDate>Tue, 10 Jun 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://agethereday.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 10 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://agethereday.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Excel看板搭建</title>
+        <link>https://agethereday.github.io/p/excel%E7%9C%8B%E6%9D%BF%E6%90%AD%E5%BB%BA/</link>
+        <pubDate>Thu, 10 Jul 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://agethereday.github.io/p/excel%E7%9C%8B%E6%9D%BF%E6%90%AD%E5%BB%BA/</guid>
+        <description>&lt;h1 id=&#34;项目excel搭建数据看板&#34;&gt;项目：EXCEL搭建数据看板
+&lt;/h1&gt;&lt;p&gt;该文章为搭建看板文档，如有错误还望海涵，评论系统还未搭建，如有疑问可通过邮箱联系我。&lt;/p&gt;
+&lt;h2 id=&#34;明确目标&#34;&gt;明确目标
+&lt;/h2&gt;&lt;p&gt;我们首先要明确搭建数据看板的目标是什么,如：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;部门&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;用途&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;看板类型&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;strong&gt;生产&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;strong&gt;保障生产效率、质量和成本可控&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;生产监控，质量管控，成本优化，设备管理&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;strong&gt;运营&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;strong&gt;提升业务效率、用户体验和业绩增长&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;业务流程监控，用户行为分析，业绩目标追踪，市场与竞争分析&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;strong&gt;财务&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;strong&gt;确保资金安全、控制财务风险、支撑战略决策&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;资金与现金流监控，成本与利润分析，预算与实际对比，财务风险预警&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;我们搭建看板的目的是为了监控生产和分析生产，激励生产的作用。&lt;/p&gt;
+&lt;h2 id=&#34;确定指标&#34;&gt;确定指标
+&lt;/h2&gt;&lt;p&gt;明确了我们的目标之后，我们需要确认我们所需的指标体系——即用什么可以衡量我们的我们的目的。这里我们以生产质量为例：&lt;/p&gt;
+&lt;p&gt;生产质量=产品合格率=（生产总数-不合格数）/生产总数(因为浮点数的原因，不要使用1-不合格率)&lt;/p&gt;
+&lt;h2 id=&#34;确认看板模块&#34;&gt;确认看板模块
+&lt;/h2&gt;&lt;p&gt;时间维度：&lt;/p&gt;
+&lt;p&gt;日度数据，周度数据，月度数据，季度数据，年度数据&lt;/p&gt;
+&lt;p&gt;空间维度：&lt;/p&gt;
+&lt;p&gt;个人，小组长，车间，部门，公司
+可视化：&lt;/p&gt;
+&lt;p&gt;表格，折线图（趋势），饼图（占比），柱状图（比较）&lt;/p&gt;
+&lt;h2 id=&#34;数据&#34;&gt;数据
+&lt;/h2&gt;&lt;p&gt;我们选用CSDN开源的生产数据，数据来源链接我会放业尾。&lt;/p&gt;
+&lt;p&gt;对原始数据其如下：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;项目名&lt;/th&gt;
+          &lt;th&gt;生产车间&lt;/th&gt;
+          &lt;th&gt;生产数量&lt;/th&gt;
+          &lt;th&gt;不合格数量&lt;/th&gt;
+          &lt;th&gt;负责人&lt;/th&gt;
+          &lt;th&gt;日期&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;SC001&lt;/td&gt;
+          &lt;td&gt;一车间&lt;/td&gt;
+          &lt;td&gt;1409&lt;/td&gt;
+          &lt;td&gt;2&lt;/td&gt;
+          &lt;td&gt;王成蕾&lt;/td&gt;
+          &lt;td&gt;2021-1-1&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;SC002&lt;/td&gt;
+          &lt;td&gt;一车间&lt;/td&gt;
+          &lt;td&gt;733&lt;/td&gt;
+          &lt;td&gt;2&lt;/td&gt;
+          &lt;td&gt;刘杰&lt;/td&gt;
+          &lt;td&gt;2021-1-1&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;SC003&lt;/td&gt;
+          &lt;td&gt;二车间&lt;/td&gt;
+          &lt;td&gt;1071&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;张博&lt;/td&gt;
+          &lt;td&gt;2021-1-1&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;SC004&lt;/td&gt;
+          &lt;td&gt;三车间&lt;/td&gt;
+          &lt;td&gt;1435&lt;/td&gt;
+          &lt;td&gt;3&lt;/td&gt;
+          &lt;td&gt;赵丽&lt;/td&gt;
+          &lt;td&gt;2021-1-1&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;我们日期拆解为年，月和日。我们使用可以使用日期函数和取数函数（取数函数需将日期改为aaaa-bb-cc形式。），我这里使用日期函数。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;year()#提取年 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ceiling(month()/3,1)#提取季度 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;month()#提取月份
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;WEEKNUM()#提前周
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;day()#提前日
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;处理后结果：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;项目名&lt;/th&gt;
+          &lt;th&gt;生产车间&lt;/th&gt;
+          &lt;th&gt;生产数量&lt;/th&gt;
+          &lt;th&gt;不合格数量&lt;/th&gt;
+          &lt;th&gt;负责人&lt;/th&gt;
+          &lt;th&gt;日期&lt;/th&gt;
+          &lt;th&gt;合格率&lt;/th&gt;
+          &lt;th&gt;月&lt;/th&gt;
+          &lt;th&gt;日&lt;/th&gt;
+          &lt;th&gt;季度&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;SC001&lt;/td&gt;
+          &lt;td&gt;一车间&lt;/td&gt;
+          &lt;td&gt;1409&lt;/td&gt;
+          &lt;td&gt;2&lt;/td&gt;
+          &lt;td&gt;王成蕾&lt;/td&gt;
+          &lt;td&gt;2021-1-1&lt;/td&gt;
+          &lt;td&gt;99.86%&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;SC002&lt;/td&gt;
+          &lt;td&gt;一车间&lt;/td&gt;
+          &lt;td&gt;733&lt;/td&gt;
+          &lt;td&gt;2&lt;/td&gt;
+          &lt;td&gt;刘杰&lt;/td&gt;
+          &lt;td&gt;2021-1-1&lt;/td&gt;
+          &lt;td&gt;99.73%&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;SC003&lt;/td&gt;
+          &lt;td&gt;二车间&lt;/td&gt;
+          &lt;td&gt;1071&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;张博&lt;/td&gt;
+          &lt;td&gt;2021-1-1&lt;/td&gt;
+          &lt;td&gt;99.91%&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;数据透视表&#34;&gt;数据透视表
+&lt;/h2&gt;&lt;p&gt;我们对生产效率出于及时性只考虑到月和日这一层次。通过筛选可以看出负责人负责多个车间，所以行从包含角度来排列，从上到下依次为，日，负责人，车间，项目名字段。值则为生产数量，不合格数量字段。筛选器选用月。&lt;/p&gt;
+&lt;p&gt;切片器：切片器是 Excel 中一种强大的数据分析工具，它可以以直观、交互的方式快速筛选数据透视表中的数据。&lt;/p&gt;
+&lt;p&gt;插入以月筛选的切片器，通过添加按钮数将其转化为横向。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://agethereday.github.io/excel.assets/image-20250823145157367.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250823145157367&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;图表的制作&#34;&gt;图表的制作
+&lt;/h2&gt;&lt;h3 id=&#34;表&#34;&gt;表
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;年表：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;按项目名汇总生产总量与不合格生产总量。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;=SUMIF(Sheet3!$A$2:$A$50001,A2,Sheet3!$C$2:$C$50001)#数据源使用原始数据表
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;月表：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;从分析的角度我们需要将异动进行拆解归因，从我们的现有数据来看可以将其拆解为“人”，“产品”，“厂房”——负责人，项目名，生产车间。不合格数=人+设备+原材料+方法+环境（厂房）&lt;/p&gt;
+&lt;p&gt;所以我们需要分别建立月负责人，月项目名，月生产车间。因为我们需要其能按月变动，所以数据源应为数据透视表。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;=SUMIF(Sheet4!$C:$C,A20,Sheet4!$F:$F)#月负责人，月项目名，月生产车间都类似
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;日表：&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;月份&lt;/th&gt;
+          &lt;th&gt;=数据透视表的月份&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;日期&lt;/td&gt;
+          &lt;td&gt;1-31（从1-31号，共31列）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;生产数量&lt;/td&gt;
+          &lt;td&gt;=SUMIF(数据透视表!$A:A,B49,数据透视表!$B:B)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;不合格数量&lt;/td&gt;
+          &lt;td&gt;=SUMIF(数据透视表!$A:A,B49,数据透视表!$C:C)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;合格率&lt;/td&gt;
+          &lt;td&gt;=（生产总数-不合格数）/生产总数&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;图&#34;&gt;图
+&lt;/h3&gt;&lt;p&gt;日合格率波动图&lt;/p&gt;
+&lt;p&gt;行列转化：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;日期&lt;/th&gt;
+          &lt;th&gt;合格率&lt;/th&gt;
+          &lt;th&gt;上限&lt;/th&gt;
+          &lt;th&gt;下限&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;0.997183623&lt;/td&gt;
+          &lt;td&gt;0.997651133&lt;/td&gt;
+          &lt;td&gt;0.996456577&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;==XLOOKUP(A45,$B$35:$AF$35,$B$38:$AF$38)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;异常值&lt;/strong&gt;计算：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Q1=QUARTILE(B38:AF38,1)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Q3=QUARTILE(B38:AF38,3)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;IQR=Q3-Q1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;异常上限=Q3+1.5IQR
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;异常下限=Q1-1.5IQR
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;纵坐标轴范围：上下限小数点四位+-1&lt;/p&gt;
+&lt;p&gt;蓝色虚线为&lt;strong&gt;趋势线&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;月份天数不同：将31和30加一个&lt;strong&gt;空值检验&lt;/strong&gt;，为空等于一个值即可。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;=IF(XLOOKUP(A75,$B$35:$AF$35,$B$38:$AF$38)=&amp;#34;&amp;#34;,B74,XLOOKUP(A75,$B$35:$AF$35,$B$38:$AF$38))
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://agethereday.github.io/excel.assets/image-20250823115902583.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250823115902583&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;月负责人不合格占比饼图&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;数据源&lt;/strong&gt;为月表中的月负责人表&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://agethereday.github.io/excel.assets/image-20250823122943001.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250823122943001&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;布局&#34;&gt;布局
+&lt;/h2&gt;&lt;p&gt;具体布局思路可以业尾的&lt;strong&gt;如何搭建看板链接&lt;/strong&gt;，或许可以对你有一些启发。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://agethereday.github.io/excel.assets/image-20250823143453996.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250823143453996&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://agethereday.github.io/excel.assets/image-20250823143522411.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250823143522411&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;数据通过xlookup进行查找即可。&lt;/p&gt;
+&lt;h2 id=&#34;看板搭建总结&#34;&gt;看板搭建总结
+&lt;/h2&gt;&lt;p&gt;纯excel搭建不够方便，需要操作的太多，数据多有点卡，可视化效果不够好，实时数据可能还需要外部导入，直接从数据库接口获取数据。可以尝试&lt;strong&gt;ableau&lt;/strong&gt;，&lt;strong&gt;Power BI&lt;/strong&gt;，或excel的&lt;strong&gt;power query&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;改进方向&#34;&gt;改进方向
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;实时动态数据&lt;/strong&gt;，为起到监控作用，其需要具有实时数据输入功能。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;异动归因&lt;/strong&gt;，原设计对异动原因无法有效分析。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;异动标准&lt;/strong&gt;，实时数据的异动标准可能需要历史数据来进行确认，或这用与预测数据和标准数据的偏离度来确认。&lt;/p&gt;
+&lt;h2 id=&#34;相关链接&#34;&gt;相关链接
+&lt;/h2&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://gitee.com/qq747715884/excel_note&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;感谢CSDN的酸菜鱼土豆大侠，Excel_Note : excel 开源文档&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/bytedata/p/16495557.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;如何搭建清晰易懂的数据看板？ - 字节跳动数据平台 - 博客园&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Xgboost的财务风险识别</title>
         <link>https://agethereday.github.io/p/xgboost%E7%9A%84%E8%B4%A2%E5%8A%A1%E9%A3%8E%E9%99%A9%E8%AF%86%E5%88%AB/</link>
         <pubDate>Tue, 10 Jun 2025 00:00:00 +0000</pubDate>
@@ -15,7 +372,7 @@
         <guid>https://agethereday.github.io/p/xgboost%E7%9A%84%E8%B4%A2%E5%8A%A1%E9%A3%8E%E9%99%A9%E8%AF%86%E5%88%AB/</guid>
         <description>&lt;img src="https://agethereday.github.io/p/xgboost%E7%9A%84%E8%B4%A2%E5%8A%A1%E9%A3%8E%E9%99%A9%E8%AF%86%E5%88%AB/XGboost%E5%8E%9F%E7%90%86.jpg" alt="Featured image of post Xgboost的财务风险识别" /&gt;&lt;h1 id=&#34;基于贝叶斯优化的xgboost二分类财务造假识别的可解释性分析修改版&#34;&gt;基于贝叶斯优化的XGBOOST二分类财务造假识别的可解释性分析（修改版）
 &lt;/h1&gt;&lt;h2 id=&#34;数据集&#34;&gt;数据集：
-&lt;/h2&gt;&lt;p&gt;数据来源：国泰安或wind&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;数据来源：&lt;strong&gt;国泰安或wind&lt;/strong&gt;&lt;/p&gt;
 &lt;h3 id=&#34;时间范围&#34;&gt;时间范围：
 &lt;/h3&gt;&lt;p&gt;时间选择距今&lt;strong&gt;4-5&lt;/strong&gt;年，&lt;strong&gt;8-12&lt;/strong&gt;年跨度的上市公司的数据（上市公司平均上市寿命为8-12年，证监会处罚具有&lt;strong&gt;滞后性&lt;/strong&gt;，一般为4-5年。）造假标准为证监会处罚归属于财务造假为准，时间范围从选择的时间起点至今。（最大增加标注准确率）&lt;/p&gt;
 &lt;h3 id=&#34;空间范围&#34;&gt;空间范围：
@@ -24,16 +381,17 @@
 &lt;/h2&gt;&lt;p&gt;理论基础：&lt;/p&gt;
 &lt;p&gt;国外：&lt;/p&gt;
 &lt;p&gt;舞弊三角论，GONE理论，舞弊风险因子理论&lt;/p&gt;
-&lt;p&gt;国内：黄世忠八因和五维识别模型。&lt;/p&gt;
+&lt;p&gt;国内：&lt;strong&gt;黄世忠八因和五维识别模型。&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;特征：&lt;/p&gt;
 &lt;p&gt;财务：选取三大财务报表的所有科目，四大指标&lt;/p&gt;
 &lt;p&gt;非财务:会计师事务所变频率，审计费用，O-Score，Z值，WindESG综合得分，公司市值，成长性，资产价值波动性，风险系数，第一大股东持股比率(%)、管理层持股比例，内部控制是否有效、内部控制是否存在缺陷、是否采取整改措施、是否出具内控评价报告结论、是否披露内控评价报告、会计变更次数（可能为“会计变更次数”）、未完成整改个数、缺陷个数，关联交易占营业收入比、是否增发新股上市，客户集中度，情感语调，cpi，人均可支配收入，GDP增速，PMI，缺失值数量，是否st，以前年度是否造假。&lt;/p&gt;
 &lt;h2 id=&#34;数据分析&#34;&gt;数据分析：
-&lt;/h2&gt;&lt;h3 id=&#34;聚类分析异质性缓解&#34;&gt;聚类分析（异质性缓解）
+&lt;/h2&gt;&lt;h3 id=&#34;聚类分析异质性缓解重要&#34;&gt;&lt;strong&gt;聚类分析（异质性缓解重要）&lt;/strong&gt;
 &lt;/h3&gt;&lt;p&gt;各行业造假数量分布不同，可按证监会行业先划分后按照业务逻辑进行合并，在合并组内进行&lt;strong&gt;KNN&lt;/strong&gt;聚类处理（可能会出现部分头部或垄断公司）。&lt;/p&gt;
 &lt;h3 id=&#34;线性关系判断&#34;&gt;线性关系判断：
 &lt;/h3&gt;&lt;p&gt;二分类因变量 + 连续自变量：用&lt;strong&gt;逻辑回归&lt;/strong&gt;检验 logit 尺度的线性关联：&lt;/p&gt;
-&lt;p&gt;​					logit(&lt;em&gt;p&lt;/em&gt;)=ln(&lt;em&gt;p&lt;/em&gt;/(1−&lt;em&gt;p&lt;/em&gt;)  其中p为 Y=1 （造假）的概率&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;				&amp;lt;center&amp;gt;logit(*p*)=ln(*p*/(1−*p*)  其中p为 Y=1 （造假）的概率&amp;lt;center&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -152,13 +510,40 @@
 &lt;/table&gt;
 &lt;h3 id=&#34;异常值处理&#34;&gt;异常值处理
 &lt;/h3&gt;&lt;p&gt;分析异常值的原因，如果不符合逻辑删去，如果是偏态分布则&lt;strong&gt;log化&lt;/strong&gt;，压缩数据。&lt;/p&gt;
-&lt;p&gt;在对正态分布的特征进行&lt;strong&gt;Z-Score&lt;/strong&gt;标准化，非正态则使用&lt;strong&gt;修正 Z-Score&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;再对正态分布的特征进行&lt;strong&gt;Z-Score&lt;/strong&gt;标准化，非正态则使用&lt;strong&gt;修正 Z-Score&lt;/strong&gt;。&lt;/p&gt;
 &lt;h2 id=&#34;特征构造&#34;&gt;特征构造
 &lt;/h2&gt;&lt;p&gt;相关信息：构造个别特征营业总收入/营业总成本，（应收账款+合同资产）/总资产，利息收入/货币资金，预付账款/总资产，固定资产周转天数，在建工程/总资产&lt;/p&gt;
 &lt;p&gt;时间趋势信息：构造滞后特征，滑动窗口，拓展窗口，差分特征。&lt;/p&gt;
 &lt;p&gt;纵向信息：构造平均绝对偏差，最大回撤特征&lt;/p&gt;
+&lt;h2 id=&#34;不平衡数据的处理&#34;&gt;不平衡数据的处理
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;采样方法&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;适用范围&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;欠采样（SMOTE）&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;少数类样本分布较均匀，无极端稀疏或孤立点。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;过采样（Random Undersampling）&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;多数类样本存在大量冗余&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;二者结合（SMOTE + Tomek Links）&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;类间边界存在大量 “模糊样本对”，需通过删除边界噪声强化类别区分。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;逻辑构造&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;设定规则，挑选出对应负样本与正样本对应&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 &lt;h2 id=&#34;特征筛选&#34;&gt;特征筛选
-&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;主成分分析法 (PCA)&lt;strong&gt;筛选，如果需要特征可解释性则使用&lt;/strong&gt;REC&lt;/strong&gt;&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;由于XGboost算法计算速度慢，在这里我们先进行初步筛选，删除方差低于阈值，和特征之间高度相关的，在根据内其重要性函数选取一定数量的特征，在进行递归消除来选取特征。XGBoost内嵌评估指标参数并非一定需要，可解释性shap足以胜任，如果筛选后速度仍旧太慢则可改用&lt;strong&gt;LightGBM&lt;/strong&gt;或&lt;strong&gt;Catboost&lt;/strong&gt;。&lt;/p&gt;
 &lt;h2 id=&#34;算法调优&#34;&gt;算法调优
 &lt;/h2&gt;&lt;p&gt;5折交叉验证 将数据按时间顺序划分为连续的5个区块（折），每次训练集为当前折之前的所有数据，测试集为当前折。确保测试集时间点始终晚于训练集。&lt;/p&gt;
 &lt;p&gt;评估指标：&lt;/p&gt;
@@ -178,15 +563,9 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;阀值优化（寻找最优F2分数）与贝叶斯超参数调优（寻找最优召回率）&lt;/p&gt;
-&lt;p&gt;对于超参数的范围可参考过往论文。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;可解释性&#34;&gt;可解释性：
-&lt;/h2&gt;&lt;p&gt;xgboost：用XGBoost内嵌评估指标参数可以增强模型特征可解释性。权重（Weight）、覆盖率（Cover）和增益（Gain）三个评估指标分别反映特征的分裂频次、信息增益及影响样本数量，量化并排序特征的重要性。&lt;/p&gt;
+&lt;p&gt;对于超参数的选取范围可参考过往论文或XGBoost文档。&lt;/p&gt;
+&lt;h2 id=&#34;可解释性&#34;&gt;可解释性：
+&lt;/h2&gt;&lt;p&gt;XGboost：用XGBoost内嵌评估指标参数可以增强模型特征可解释性。权重（Weight）、覆盖率（Cover）和增益（Gain）三个评估指标分别反映特征的分裂频次、信息增益及影响样本数量，量化并排序特征的重要性。&lt;/p&gt;
 &lt;p&gt;shap值：SHAP 即 SHapley Additive exPlanations（夏普利加性解释） ，是可解释人工智能（XAI）领域中一种强大的技术。它基于博弈论中的 Shapley 值，用于解释机器学习模型的输出 。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://agethereday.github.io/p/xgboost%E7%9A%84%E8%B4%A2%E5%8A%A1%E9%A3%8E%E9%99%A9%E8%AF%86%E5%88%AB/index.assets/image-20250821202646955.png&#34;
 	width=&#34;830&#34;
@@ -233,14 +612,18 @@
 	
 &gt;&lt;/p&gt;
 &lt;center&gt;覆盖率 &lt;center&gt;
-&lt;p&gt;&lt;img src=&#34;https://agethereday.github.io/index.assets/image-20250821203852778.png&#34;
-	
-	
-	
+&lt;p&gt;&lt;img src=&#34;https://agethereday.github.io/p/xgboost%E7%9A%84%E8%B4%A2%E5%8A%A1%E9%A3%8E%E9%99%A9%E8%AF%86%E5%88%AB/index.assets/image-20250821203852778.png&#34;
+	width=&#34;830&#34;
+	height=&#34;292&#34;
+	srcset=&#34;https://agethereday.github.io/p/xgboost%E7%9A%84%E8%B4%A2%E5%8A%A1%E9%A3%8E%E9%99%A9%E8%AF%86%E5%88%AB/index.assets/image-20250821203852778_hu12481866188837041281.png 480w, https://agethereday.github.io/p/xgboost%E7%9A%84%E8%B4%A2%E5%8A%A1%E9%A3%8E%E9%99%A9%E8%AF%86%E5%88%AB/index.assets/image-20250821203852778_hu12506172912876355103.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image-20250821203852778&#34;
 	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;284&#34;
+		data-flex-basis=&#34;682px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;center&gt;增益 &lt;center&gt;
@@ -276,9 +659,9 @@
 &lt;center&gt;交互图（用于判别各特征的交互作用，如目前特征量大的情况下并不好用）&lt;center&gt;
 &lt;p&gt;相关链接：&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://docs.xgboost.com.cn/en/release_3.0.0/parameter.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;XGBoost &lt;/a&gt;&lt;/p&gt;
+    &gt;XGBoost 官方文档&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://shap.readthedocs.cn/en/latest/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;SHAP&lt;/a&gt;&lt;/p&gt;
+    &gt;SHAP官方文档&lt;/a&gt;&lt;/p&gt;
 </description>
         </item>
         <item>
