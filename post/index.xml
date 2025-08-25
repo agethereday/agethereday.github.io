@@ -187,20 +187,12 @@
 &lt;/h2&gt;&lt;p&gt;我们对生产效率出于及时性只考虑到月和日这一层次。通过筛选可以看出负责人负责多个车间，所以行从包含角度来排列，从上到下依次为，日，负责人，车间，项目名字段。值则为生产数量，不合格数量字段。筛选器选用月。&lt;/p&gt;
 &lt;p&gt;切片器：切片器是 Excel 中一种强大的数据分析工具，它可以以直观、交互的方式快速筛选数据透视表中的数据。&lt;/p&gt;
 &lt;p&gt;插入以月筛选的切片器，通过添加按钮数将其转化为横向。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://agethereday.github.io/p/excel%E7%9C%8B%E6%9D%BF%E6%90%AD%E5%BB%BA/1.png&#34;
-	width=&#34;828&#34;
-	height=&#34;1029&#34;
-	srcset=&#34;https://agethereday.github.io/p/excel%E7%9C%8B%E6%9D%BF%E6%90%AD%E5%BB%BA/1_hu2044404018768988115.png 480w, https://agethereday.github.io/p/excel%E7%9C%8B%E6%9D%BF%E6%90%AD%E5%BB%BA/1_hu14113761075493503662.png 1024w&#34;
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;1&#34;
-	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;80&#34;
-		data-flex-basis=&#34;193px&#34;
-	
-&gt;&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&#34;https://agethereday.github.io/p/excel%E7%9C%8B%E6%9D%BF%E6%90%AD%E5%BB%BA/1.png&#34;
+    alt=&#34;1&#34;&gt;&lt;figcaption&gt;
+      &lt;h4&gt;1&lt;/h4&gt;
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+
 &lt;h2 id=&#34;图表的制作&#34;&gt;图表的制作
 &lt;/h2&gt;&lt;h3 id=&#34;表&#34;&gt;表
 &lt;/h3&gt;&lt;ul&gt;
@@ -318,66 +310,34 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;=IF(XLOOKUP(A75,$B$35:$AF$35,$B$38:$AF$38)=&amp;#34;&amp;#34;,B74,XLOOKUP(A75,$B$35:$AF$35,$B$38:$AF$38))
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://agethereday.github.io/p/excel%E7%9C%8B%E6%9D%BF%E6%90%AD%E5%BB%BA/2.png&#34;
-	width=&#34;1197&#34;
-	height=&#34;223&#34;
-	srcset=&#34;https://agethereday.github.io/p/excel%E7%9C%8B%E6%9D%BF%E6%90%AD%E5%BB%BA/2_hu15234275869169217275.png 480w, https://agethereday.github.io/p/excel%E7%9C%8B%E6%9D%BF%E6%90%AD%E5%BB%BA/2_hu6825272587495095324.png 1024w&#34;
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;2.png&#34;
-	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;536&#34;
-		data-flex-basis=&#34;1288px&#34;
-	
-&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;figure&gt;&lt;img src=&#34;https://agethereday.github.io/p/excel%E7%9C%8B%E6%9D%BF%E6%90%AD%E5%BB%BA/2.png&#34;
+    alt=&#34;2&#34;&gt;&lt;figcaption&gt;
+      &lt;h4&gt;2&lt;/h4&gt;
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+
 &lt;p&gt;月负责人不合格占比饼图&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;数据源&lt;/strong&gt;为月表中的月负责人表&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://agethereday.github.io/p/excel%E7%9C%8B%E6%9D%BF%E6%90%AD%E5%BB%BA/3.png&#34;
-	width=&#34;305&#34;
-	height=&#34;218&#34;
-	srcset=&#34;https://agethereday.github.io/p/excel%E7%9C%8B%E6%9D%BF%E6%90%AD%E5%BB%BA/3_hu9228683751397029935.png 480w, https://agethereday.github.io/p/excel%E7%9C%8B%E6%9D%BF%E6%90%AD%E5%BB%BA/3_hu14950940359656239553.png 1024w&#34;
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;3.PNG&#34;
-	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;139&#34;
-		data-flex-basis=&#34;335px&#34;
-	
-&gt;&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&#34;https://agethereday.github.io/p/excel%E7%9C%8B%E6%9D%BF%E6%90%AD%E5%BB%BA/3.png&#34;
+    alt=&#34;3&#34;&gt;&lt;figcaption&gt;
+      &lt;h4&gt;3&lt;/h4&gt;
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+
 &lt;h2 id=&#34;布局&#34;&gt;布局
 &lt;/h2&gt;&lt;p&gt;具体布局思路可以业尾的&lt;strong&gt;如何搭建看板链接&lt;/strong&gt;，或许可以对你有一些启发。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://agethereday.github.io/p/excel%E7%9C%8B%E6%9D%BF%E6%90%AD%E5%BB%BA/4.png&#34;
-	width=&#34;1771&#34;
-	height=&#34;1105&#34;
-	srcset=&#34;https://agethereday.github.io/p/excel%E7%9C%8B%E6%9D%BF%E6%90%AD%E5%BB%BA/4_hu16679938258007040778.png 480w, https://agethereday.github.io/p/excel%E7%9C%8B%E6%9D%BF%E6%90%AD%E5%BB%BA/4_hu909196508016476192.png 1024w&#34;
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;4.png&#34;
-	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;160&#34;
-		data-flex-basis=&#34;384px&#34;
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://agethereday.github.io/p/excel%E7%9C%8B%E6%9D%BF%E6%90%AD%E5%BB%BA/5.png&#34;
-	width=&#34;1781&#34;
-	height=&#34;1097&#34;
-	srcset=&#34;https://agethereday.github.io/p/excel%E7%9C%8B%E6%9D%BF%E6%90%AD%E5%BB%BA/5_hu15083592250929697603.png 480w, https://agethereday.github.io/p/excel%E7%9C%8B%E6%9D%BF%E6%90%AD%E5%BB%BA/5_hu3068675999534393245.png 1024w&#34;
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;5.png&#34;
-	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;162&#34;
-		data-flex-basis=&#34;389px&#34;
-	
-&gt;&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&#34;https://agethereday.github.io/p/excel%E7%9C%8B%E6%9D%BF%E6%90%AD%E5%BB%BA/4.png&#34;
+    alt=&#34;4&#34;&gt;&lt;figcaption&gt;
+      &lt;h4&gt;4&lt;/h4&gt;
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;figure&gt;&lt;img src=&#34;https://agethereday.github.io/p/excel%E7%9C%8B%E6%9D%BF%E6%90%AD%E5%BB%BA/5.png&#34;
+    alt=&#34;5&#34;&gt;&lt;figcaption&gt;
+      &lt;h4&gt;5&lt;/h4&gt;
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+
 &lt;p&gt;数据通过xlookup进行查找即可。&lt;/p&gt;
 &lt;h2 id=&#34;看板搭建总结&#34;&gt;看板搭建总结
 &lt;/h2&gt;&lt;p&gt;纯excel搭建不够方便，需要操作的太多，数据多有点卡，可视化效果不够好，实时数据可能还需要外部导入，直接从数据库接口获取数据。可以尝试&lt;strong&gt;Tableau&lt;/strong&gt;，&lt;strong&gt;Power BI&lt;/strong&gt;，或excel的&lt;strong&gt;power query&lt;/strong&gt;。&lt;/p&gt;
