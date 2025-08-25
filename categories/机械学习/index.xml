@@ -7,7 +7,15 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>yhj</copyright>
-        <lastBuildDate>Tue, 10 Jun 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://agethereday.github.io/categories/%E6%9C%BA%E6%A2%B0%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 10 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://agethereday.github.io/categories/%E6%9C%BA%E6%A2%B0%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>销售预测</title>
+        <link>https://agethereday.github.io/p/%E9%94%80%E5%94%AE%E9%A2%84%E6%B5%8B/</link>
+        <pubDate>Sun, 10 Aug 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://agethereday.github.io/p/%E9%94%80%E5%94%AE%E9%A2%84%E6%B5%8B/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>Xgboost的财务风险识别</title>
         <link>https://agethereday.github.io/p/xgboost%E7%9A%84%E8%B4%A2%E5%8A%A1%E9%A3%8E%E9%99%A9%E8%AF%86%E5%88%AB/</link>
         <pubDate>Tue, 10 Jun 2025 00:00:00 +0000</pubDate>
